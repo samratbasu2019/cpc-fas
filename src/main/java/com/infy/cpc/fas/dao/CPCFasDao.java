@@ -9,8 +9,8 @@ import org.springframework.stereotype.Repository;
 
 import com.infy.cpc.fas.entity.Address;
 import com.infy.cpc.fas.entity.User;
-import com.infy.cpc.fas.repository.CPCCRUDAddressRepository;
-import com.infy.cpc.fas.repository.CPCCRUDUserRepository;
+import com.infy.cpc.fas.repository.CRUDAddressRepository;
+import com.infy.cpc.fas.repository.CRUDUserRepository;
 import com.infy.cpc.fas.request.FASRequestAddress;
 import com.infy.cpc.fas.request.FASRequestBody;
 import com.infy.cpc.fas.response.ResponseStatus;
@@ -19,9 +19,9 @@ import com.infy.cpc.fas.response.ResponseStatus;
 public class CPCFasDao<T> {
 	private final static Logger log = Logger.getLogger(CPCFasDao.class);
 	@Autowired
-	private CPCCRUDUserRepository userRepository;
+	private CRUDUserRepository userRepository;
 	@Autowired
-	private CPCCRUDAddressRepository addressRepository;
+	private CRUDAddressRepository addressRepository;
 
 	public ResponseStatus updateUser(FASRequestBody req) {
 		ResponseStatus response = new ResponseStatus();
