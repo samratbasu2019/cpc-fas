@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+                                     http://xmlns.jcp.org/xml/ns/persistence/orm_2_0.xsd"
+	version="2.1">
+	<!-- JPA Named Queries -->
+	<named-native-query name="GETUSER">
+		<query>SELECT * FROM user_infy</query>
+	</named-native-query>
+	<!-- <named-query name="getPhraseByID">
+		<query>SELECT b FROM Phrase b WHERE b.documentId = :documentId</query>
+	</named-query> -->
+	<!-- <named-native-query name="getPhraseID">
+		<query>SELECT * FROM Phrase  WHERE document_id = :documentId</query>
+	</named-native-query> -->
+</entity-mappings>
