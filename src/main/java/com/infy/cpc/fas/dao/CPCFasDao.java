@@ -40,9 +40,9 @@ public class CPCFasDao<T> {
 	private CRUDAddressRepository addressRepository;
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("db-queries");
 	EntityManager em = emf.createEntityManager();
-
+	ResponseStatus response = new ResponseStatus();
 	public ResponseStatus updateUser(FASRequestBody req) {
-		ResponseStatus response = new ResponseStatus();
+		
 		try {
 
 			User user = new User();
@@ -73,8 +73,17 @@ public class CPCFasDao<T> {
 		return response;
 	}
 
-	public List<StudentDetails> getStudentDataSet(String id) {
+	public List<?> getStudentDataSet(String id) {
 		List<StudentDetails> list = em.createNamedQuery("GET_STUDENT_DETAILS").setParameter("id", Integer.parseInt(id)).getResultList();
-		return list;
+		if (!list.isEmpty())
+			return list;
+		else {
+			List<ResponseStatus> lstEmpty = new ArrayList<>();
+			response.setStatus("failed");
+			response.setStatCode(204);
+			response.setMessage("No records found.");
+			lstEmpty.add(response);
+			return lstEmpty;
+		}
 	}
 }
