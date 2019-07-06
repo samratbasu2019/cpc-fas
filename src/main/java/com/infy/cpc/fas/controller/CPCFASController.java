@@ -1,14 +1,19 @@
 package com.infy.cpc.fas.controller;
 
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infy.cpc.fas.request.FASRequestBody;
 import com.infy.cpc.fas.response.ResponseStatus;
@@ -21,6 +26,7 @@ public class CPCFASController {
 
 	@Autowired
 	private CPCFasService fasService;
+	ObjectMapper mapper = new ObjectMapper();
 
 	@RequestMapping(value = "/updateFas", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> updateFAS(@RequestBody FASRequestBody requestBody) {
@@ -30,7 +36,6 @@ public class CPCFASController {
 		Object result = null;
 
 		try {
-			ObjectMapper mapper = new ObjectMapper();
 			result = fasService.updateFASDataSet(requestBody);
 			jsonInString = mapper.writeValueAsString(result);
 
@@ -45,5 +50,19 @@ public class CPCFASController {
 		return result != null ? new ResponseEntity<>(jsonInString, HttpStatus.OK)
 				: new ResponseEntity<>(jsonInString, HttpStatus.BAD_REQUEST);
 
+	}
+
+	@RequestMapping(value = "/getFASDataSet/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<?> getFASData(@PathVariable String id) {
+		List<?> result = null;
+		String jsonInString = null;
+		try {
+			result = fasService.getFASDataSet(id);
+			jsonInString = mapper.writeValueAsString(result);
+		} catch (JsonProcessingException e) {
+			return new ResponseEntity<>(e.getCause().toString(), HttpStatus.EXPECTATION_FAILED);
+		}
+
+		return new ResponseEntity<>(jsonInString,HttpStatus.OK);
 	}
 }

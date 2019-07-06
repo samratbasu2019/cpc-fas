@@ -14,6 +14,9 @@
 				value="jdbc:postgresql://localhost:5432/postgres" />
 			<property name="javax.persistence.jdbc.user" value="postgres" />
 			<property name="javax.persistence.jdbc.password" value="root" />
+			<property name="spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation" value="true" />
+			<property name="spring.jpa.database" value="POSTGRESQL" />
+			<property name="spring.datasource.platform" value="postgres" />
 			<!-- Hibernate properties -->
 			<!-- <property name="hibernate.dialect"
 				value="org.hibernate.dialect.PostgreSQLDialect" /> -->

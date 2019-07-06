@@ -6,9 +6,20 @@
                                      http://xmlns.jcp.org/xml/ns/persistence/orm_2_0.xsd"
 	version="2.1">
 	<!-- JPA Named Queries -->
-	<named-native-query name="GETUSER">
-		<query>SELECT * FROM user_infy</query>
-	</named-native-query>
+	<!-- <named-native-query name="GET_STUDENT_DETAILS">
+		<query>SELECT NEW com.infy.cpc.fas.model.StudentDetails (a.id, a.name, a.dob, a.sex, b.address, b.landmark) FROM User a INNER JOIN Address b WHERE a.id=b.user_id and a.id= :id</query>
+	</named-native-query> -->
+	
+	<named-query name="GET_STUDENT_DETAILS">
+		<query>SELECT NEW com.infy.cpc.fas.model.StudentDetails (a.id, a.name, a.dob, a.sex, b.address, b.landmark) FROM User a INNER JOIN Address b ON a.id=b.userid and a.id= :id</query>
+	</named-query>
+	
+	<named-query name="GET_STUDENT_DETAILS_HQL">
+		<query>SELECT b FROM User b WHERE b.id = :id</query>
+	</named-query>
+	<named-query name="GET_ADDRESS_DETAILS_HQL">
+		<query>SELECT b FROM Address b WHERE b.userid = :id</query>
+	</named-query>
 	<!-- <named-query name="getPhraseByID">
 		<query>SELECT b FROM Phrase b WHERE b.documentId = :documentId</query>
 	</named-query> -->

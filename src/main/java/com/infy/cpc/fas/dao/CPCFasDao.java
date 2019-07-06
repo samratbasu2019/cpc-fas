@@ -1,14 +1,30 @@
 package com.infy.cpc.fas.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.apache.log4j.Logger;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.infy.cpc.fas.entity.Address;
 import com.infy.cpc.fas.entity.User;
+import com.infy.cpc.fas.model.StudentDetails;
 import com.infy.cpc.fas.repository.CRUDAddressRepository;
 import com.infy.cpc.fas.repository.CRUDUserRepository;
 import com.infy.cpc.fas.request.FASRequestAddress;
@@ -22,6 +38,8 @@ public class CPCFasDao<T> {
 	private CRUDUserRepository userRepository;
 	@Autowired
 	private CRUDAddressRepository addressRepository;
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("db-queries");
+	EntityManager em = emf.createEntityManager();
 
 	public ResponseStatus updateUser(FASRequestBody req) {
 		ResponseStatus response = new ResponseStatus();
@@ -41,7 +59,7 @@ public class CPCFasDao<T> {
 				address.setUserid(user.getId());
 				addressRepository.saveAndFlush(address);
 			}
-			
+
 			response.setStatus("success");
 			response.setStatCode(200);
 			response.setMessage("Data saved successfully");
@@ -53,5 +71,10 @@ public class CPCFasDao<T> {
 			ex.printStackTrace();
 		}
 		return response;
+	}
+
+	public List<StudentDetails> getStudentDataSet(String id) {
+		 List<StudentDetails> list = em.createNamedQuery("GET_STUDENT_DETAILS").setParameter("id", Integer.parseInt(id)).getResultList();
+		return list;
 	}
 }
