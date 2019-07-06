@@ -1,6 +1,6 @@
 # cpc-fas
 
-This has example of JPA Named Query & Transaction Management
+This an example project using JPA Named Query & Transaction Management and postgres SQL
 
 POST:
 http://localhost:8300/cpc/updateFas
