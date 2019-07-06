@@ -7,7 +7,7 @@
 	version="2.1">
 	<!-- JPA Named Queries -->
 	<!-- <named-native-query name="GET_STUDENT_DETAILS">
-		<query>SELECT NEW com.infy.cpc.fas.model.StudentDetails (a.id, a.name, a.dob, a.sex, b.address, b.landmark) FROM User a INNER JOIN Address b WHERE a.id=b.user_id and a.id= :id</query>
+		<query>SELECT a.* FROM uner_infy a, address_infy b WHERE a.id=b.user_id and a.id= :id</query>
 	</named-native-query> -->
 	
 	<named-query name="GET_STUDENT_DETAILS">
