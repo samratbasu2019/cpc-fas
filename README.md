@@ -1,5 +1,7 @@
 # cpc-fas
 
+This has example of JPA Named Query & Transaction Management
+
 POST:
 http://localhost:8300/cpc/updateFas
 {
