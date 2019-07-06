@@ -74,7 +74,7 @@ public class CPCFasDao<T> {
 	}
 
 	public List<StudentDetails> getStudentDataSet(String id) {
-		 List<StudentDetails> list = em.createNamedQuery("GET_STUDENT_DETAILS").setParameter("id", Integer.parseInt(id)).getResultList();
+		List<StudentDetails> list = em.createNamedQuery("GET_STUDENT_DETAILS").setParameter("id", Integer.parseInt(id)).getResultList();
 		return list;
 	}
 }
